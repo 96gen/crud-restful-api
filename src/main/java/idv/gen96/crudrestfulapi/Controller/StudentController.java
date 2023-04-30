@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/users")
@@ -26,5 +28,13 @@ public class StudentController {
     public ResponseEntity<User> getUserById(@PathVariable(name = "id") long userId){
         User user = userService.getUserById(userId);
         return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    //在網址列輸入http://localhost:8080/api/users來查詢全部的user資訊
+    //雖然和PostMapping使用同一個網址，但是一個是GET另一個是POST，所以不會發生誤判
+    @GetMapping
+    public ResponseEntity<List<User>> getAllUsers(){
+        List<User> users = userService.getAllUsers();
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 }
