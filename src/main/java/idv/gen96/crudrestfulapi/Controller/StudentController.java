@@ -47,4 +47,11 @@ public class StudentController {
         User updateUser = userService.updateUser(user);
         return new ResponseEntity<>(updateUser, HttpStatus.OK);
     }
+
+    //使用DELETE傳資料到http://localhost:8080/api/users/{id}刪除user
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable(name = "id") long userId){
+        userService.deleteUser(userId);
+        return new ResponseEntity<>("User successfully deleted!", HttpStatus.OK);
+    }
 }
