@@ -37,4 +37,14 @@ public class StudentController {
         List<User> users = userService.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
+
+    //使用PUT傳資料到http://localhost:8080/api/users/{id}修改user資料
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable(name = "id") long userId,
+                                           //RequestBody接收傳入的JSON資訊
+                                           @RequestBody User user){
+        user.setId(userId);//傳入的JSON資料中沒有包含id，要額外加入
+        User updateUser = userService.updateUser(user);
+        return new ResponseEntity<>(updateUser, HttpStatus.OK);
+    }
 }
